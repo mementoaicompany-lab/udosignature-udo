@@ -1,0 +1,10 @@
+{
+  "name": "우도여행",
+  "theme": "travel",
+  "domain": "udo.udosignature.com",
+  "baseUrl": "https://udo.udosignature.com/",
+  "project": "udosignature-udo",
+  "private": false,
+  "naverVerification": null,
+  "checkedAt": "2026-09-20"
+}
