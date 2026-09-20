@@ -5,6 +5,6 @@
   "baseUrl": "https://udo.udosignature.com/",
   "project": "udosignature-udo",
   "private": false,
-  "naverVerification": null,
+  "naverVerification": "d7389aa4ebb8ffe1a55eb43ef84cface74b3771b",
   "checkedAt": "2026-09-20"
 }
