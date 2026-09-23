@@ -29,3 +29,6 @@ body{overflow-wrap:break-word}button,a,input,summary{-webkit-tap-highlight-color
 @media(prefers-reduced-motion:reduce){.cinema-image{animation:none}.universe-card img,.tour-pick-grid img,.flavor-card,.btn{transition:none}.panorama-toggle{display:none}}
 
 @media(max-width:760px){.scoop-copy h1 br:first-of-type{display:initial}}
+
+/* Static editorial answers remain available without JavaScript. */
+.seo-questions details{border-bottom:1px solid #ddd;padding:22px 0}.seo-questions summary{font-weight:700;cursor:pointer;font-size:1.1rem}.seo-questions details p{max-width:850px;line-height:1.8;margin:16px 0 0}.article p{overflow-wrap:break-word}
