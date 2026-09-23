@@ -1,17 +1,39 @@
-name: Verify independent brand website
-on: [push, workflow_dispatch]
+name: Publish reviewed SEO update
+on:
+  push:
+    paths: ['.github/workflows/install-website.yml']
+  workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
-  verify:
+  install:
     if: github.repository == 'mementoaicompany-lab/udosignature-udo'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build and check static site
+      - name: Install reviewed website package
         run: |
+          python3 - <<'PYCODE'
+          import hashlib,zipfile,pathlib,shutil
+          p=pathlib.Path('website-package.zip')
+          assert hashlib.sha256(p.read_bytes()).hexdigest() == '8f624c4f718e958c773afd14e9b62cbb560dfe9e0920df041e3a0437e70969dc'
+          with zipfile.ZipFile(p) as z:
+              for name in z.namelist():
+                  q=pathlib.PurePosixPath(name)
+                  assert not q.is_absolute() and '..' not in q.parts
+                  assert not any(x in q.parts for x in ['.git','.github','.openai'])
+              for name in ['docs','assets','src','scripts','content']:
+                  if pathlib.Path(name).exists(): shutil.rmtree(name)
+              z.extractall('.')
+          p.unlink()
+          PYCODE
           python3 build.py
           python3 scripts/check.py
           for script in assets/*.js; do node --check "$script"; done
           if [ -f scripts/check-ferry.cjs ]; then node scripts/check-ferry.cjs; fi
-          git diff --exit-code -- docs
+          if [ -f scripts/check-motion.cjs ]; then node scripts/check-motion.cjs; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- ':!.github'
+          git commit -m 'Improve search-intent content, structured data, and search verification'
+          git push origin HEAD:main
