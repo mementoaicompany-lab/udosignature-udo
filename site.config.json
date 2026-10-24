@@ -13,5 +13,11 @@
     "우도관광",
     "우도 여행 안내"
   ],
-  "indexNowKey": "8935719c763043cfb70948fa6662a96e"
+  "indexNowKey": "8935719c763043cfb70948fa6662a96e",
+  "visitorCounter": {
+    "site": "udo",
+    "startedAt": "2026-10-24",
+    "timezone": "Asia/Seoul",
+    "counting": "browser-per-day"
+  }
 }
